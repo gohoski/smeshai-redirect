@@ -77,10 +77,13 @@
                 console.log("Это не TikTok");
                 let yt = "@aismeshariki1";
                 if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                    if (confirm("У вас установлено приложение YouTube?")) {
-                        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+                    let app = false;
+                    if (!/Firefox/.test(navigator.userAgent))
+                        app = confirm("У вас установлено приложение YouTube?");
+                    if (app) {
+                        if (/iPad|iPhone|iPod/i.test(navigator.userAgent)) {
                             location.href = "youtube://www.youtube.com/" + yt + "/live";
-                        } else if (/Android/.test(navigator.userAgent)) {
+                        } else if (/Android/i.test(navigator.userAgent)) {
                             location.href = "vnd.youtube://www.youtube.com/" + yt + "/live";
                         } else {
                             alert("Не удалось определить устройство. Попробуйте открыть через сайт");
