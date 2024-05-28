@@ -137,7 +137,7 @@
             return new Promise(resolve => setTimeout(resolve, ms));
         }
 
-        async function waitBrowser() {
+        async function waitBrowser(yt) {
             await sleep(2000);
             showactivity("openBrowser", "block");
             document.getElementById('button').href = "https://m.youtube.com/" + yt + "/live";
@@ -153,10 +153,10 @@
                     let yt = await (await fetch("./yt.txt")).text();
                     if (/iPad|iPhone|iPod/i.test(navigator.userAgent)) {
                         location.href = "youtube://www.youtube.com/" + yt + "/live";
-                        waitBrowser();
+                        waitBrowser(yt);
                     } else if (/Android/i.test(navigator.userAgent)) {
                         location.href = "vnd.youtube://www.youtube.com/" + yt + "/live";
-                        waitBrowser();
+                        waitBrowser(yt);
                     } else if (/webOS|BlackBerry|IEMobile|Opera Mini|mobile/i.test(navigator.userAgent))
                         location.href = "https://m.youtube.com/" + yt + "/live";
                     else
