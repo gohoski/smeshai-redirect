@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>НейроШарики &#x1F916;</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
         html, body, .activity {
             height: 100%;
@@ -13,93 +15,88 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
         }
         
         body {
             background-color: #121212;
             color: #ffffff;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: "Rubik", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
             margin: 0;
             padding: 0;
             height: 100vh;
         }
-
-        .button {
-            background-color: #FF3B5C;
-            color: #ffffff;
-            border: none;
-            padding: 6px 8px;
-            font-size: 18px;
-            font-weight: 600;
-            border-radius: 4px;
-            cursor: pointer;
-            min-width: 208px;
-            line-height: 22px;
-            min-height: 36px;
-            outline: none;
-        }
-
-        .button:hover {
-            background-color: #EF2950;
-        }
-
-        .button:active {
-            background-color: #e22349;
-        }
-
-        h2,
-        h3,
-        h4 {
-            text-align: center;
-            margin: 8px;
-        }
-
         .tutorialimg {
-            margin-top: 8px;
+            margin-top: 2%;
             border-radius: 16px;
         }
+        .loader {
+            width: 40px;
+            aspect-ratio: 1;
+            --c: linear-gradient(#fff 0 0);
+            --m: radial-gradient(farthest-side,#fff 92%,#121212);
+            background: 
+                var(--c),var(--m),
+                var(--c),var(--m), 
+                var(--c),var(--m);
+            background-size: 8px 12px,8px 8px;
+            background-repeat: no-repeat;
+            animation: l13 0.75s infinite alternate;
+        }
+        @keyframes l13 {
+            0%,
+            100%  {background-position: 0 0              ,0 100%           ,50% 0              ,50% 100%           ,100% 0              ,100% 100%}
+            20%   {background-position: 0 calc(50% - 6px),0 calc(50% + 4px),50% 0              ,50% 100%           ,100% 0              ,100% 100%}
+            40%   {background-position: 0 calc(50% - 6px),0 calc(50% + 4px),50% calc(50% - 6px),50% calc(50% + 4px),100% 0              ,100% 100%}
+            60%   {background-position: 0 0              ,0 100%           ,50% calc(50% - 6px),50% calc(50% + 4px),100% calc(50% - 6px),100% calc(50% + 4px)}
+            80%   {background-position: 0 0              ,0 100%           ,50% 0              ,50% 100%           ,100% calc(50% - 6px),100% calc(50% + 4px)}
+        }
+        .button-5 {
+            align-items: center;
+            background-clip: padding-box;
+            background-color: #fa6400;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            font-weight: 600;
+            justify-content: center;
+            line-height: 1.25;
+            margin: 0;
+            min-height: 3rem;
+            padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+            position: relative;
+            text-decoration: none;
+            transition: all 250ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: baseline;
+            width: auto;
+        }
 
-        .perehod {
-            text-align: center;
-            margin-bottom: 32px;
+        .button-5:hover,
+        .button-5:focus {
+            background-color: #fb8332;
+            box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+        }
+
+        .button-5:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-5:active {
+            background-color: #c85000;
+            box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+            transform: translateY(0);
         }
     </style>
-    <script>
-        function showactivity(a, b) {
-            document.getElementById("main").style.display = "none";
-            document.getElementById("tiktok").style.display = "none";
-            document.getElementById(a).style.display = b;
-        }
-
-        function stream() {
-            let userAgent = navigator.userAgent;
-            if (userAgent.includes("BytedanceWebview")) {
-                console.log("Это TikTok");
-                showactivity("tiktok", "block");
-            } else {
-                console.log("Это не TikTok");
-                let yt = "@aismeshariki7";
-                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                    let app = false;
-                    if (!/Firefox/.test(navigator.userAgent))
-                        app = confirm("У вас установлено приложение YouTube?");
-                    if (app) {
-                        if (/iPad|iPhone|iPod/i.test(navigator.userAgent)) {
-                            location.href = "youtube://www.youtube.com/" + yt + "/live";
-                        } else if (/Android/i.test(navigator.userAgent)) {
-                            location.href = "vnd.youtube://www.youtube.com/" + yt + "/live";
-                        } else {
-                            alert("Не удалось определить устройство. Попробуйте открыть через сайт");
-                        }
-                    } else {
-                        location.href = "https://m.youtube.com/" + yt + "/live";
-                    }
-                } else {
-                    location.href = "https://www.youtube.com/" + yt + "/live";
-                }
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -107,24 +104,69 @@
         <div style="flex-direction: column;
         justify-content: center;
         align-items: center; display: flex; width: 100%; height: 100%;">
-            <h1 class="perehod">Переходник для НейроШариков</h1>
-            <button class="button" onclick="stream();">Перейти на стрим</button>
+            <div class="loader"></div>
+        </div>
+    </div>
+    <div class="activity" id="openBrowser">
+        <div style="flex-direction: column;
+        justify-content: center;
+        align-items: center; display: flex; width: 100%; height: 100%;">
+            <a class="button-5" role="button" href="" id="button">Открыть в браузере</a>
         </div>
     </div>
     <div class="activity" id="tiktok">
-        <h2>&#9888; Вы используете браузер от TikTok</h2>
-        <h3>Открыть стрим в таком браузере нельзя.</h3>
-        <h3>Как это исправить:</h3>
-        <h4>1. Нажмите на три точки сверху<br />
+        <div style="flex-direction: column;
+        justify-content: center;
+        align-items: center; display: flex; width: 100%; height: 100%;">
+        <h3>1. Нажмите на три точки сверху<br />
             <img class="tutorialimg" width="100%" src="1.jpg">
-        </h4>
-        <h4>2. Нажмите «Открыть в браузере»<br />
+        </h3>
+        <h3>2. Нажмите «Открыть в браузере»<br />
             <img class="tutorialimg" width="100%" src="2.jpg">
-        </h4>
+        </h3>
+        </div>
     </div>
+    <script>
+        function showactivity(a, b) {
+            document.getElementById("main").style.display = "none";
+            document.getElementById("tiktok").style.display = "none";
+            document.getElementById("openBrowser").style.display = "none";
+            document.getElementById(a).style.display = b;
+        }
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function waitBrowser() {
+            await sleep(2000);
+            showactivity("openBrowser", "block");
+            document.getElementById('button').href = "https://m.youtube.com/" + yt + "/live";
+        }
+    
+        showactivity("main", "block");
+        (async () => {
+            await sleep(2000);
+            if (navigator.userAgent.includes("BytedanceWebview"))
+                showactivity("tiktok", "block");
+            else {
+                try {
+                    let yt = await (await fetch("./yt.txt")).text();
+                    if (/iPad|iPhone|iPod/i.test(navigator.userAgent)) {
+                        location.href = "youtube://www.youtube.com/" + yt + "/live";
+                        waitBrowser();
+                    } else if (/Android/i.test(navigator.userAgent)) {
+                        location.href = "vnd.youtube://www.youtube.com/" + yt + "/live";
+                        waitBrowser();
+                    } else if (/webOS|BlackBerry|IEMobile|Opera Mini|mobile/i.test(navigator.userAgent))
+                        location.href = "https://m.youtube.com/" + yt + "/live";
+                    else
+                        location.href = "https://www.youtube.com/" + yt + "/live";
+                } catch(err) {
+                    alert("Произошла ошибка, повторите попытку позже. " + err.message)
+                }
+            }
+        })();
+    </script>
 </body>
-<script>
-    showactivity("main", "block");
-</script>
 
 </html>
