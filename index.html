@@ -150,17 +150,26 @@
                 showactivity("tiktok", "block");
             else {
                 try {
-                    let yt = await (await fetch("./yt.txt")).text();
-                    if (/iPad|iPhone|iPod/i.test(navigator.userAgent)) {
-                        location.href = "youtube://www.youtube.com/" + yt + "/live";
-                        waitBrowser(yt);
-                    } else if (/Android/i.test(navigator.userAgent)) {
-                        location.href = "vnd.youtube://www.youtube.com/" + yt + "/live";
-                        waitBrowser(yt);
-                    } else if (/webOS|BlackBerry|IEMobile|Opera Mini|mobile/i.test(navigator.userAgent))
-                        location.href = "https://m.youtube.com/" + yt + "/live";
-                    else
-                        location.href = "https://www.youtube.com/" + yt + "/live";
+                    let url = await (await fetch("./url.txt")).text();
+                    if (url.startsWith('youtube:')) {
+                        const yt = url.split('youtube:')[1];
+                        if (/iPad|iPhone|iPod/i.test(navigator.userAgent)) {
+                            location.href = "youtube://www.youtube.com/" + yt + "/live";
+                            waitBrowser(yt);
+                        } else if (/Android/i.test(navigator.userAgent)) {
+                            location.href = "vnd.youtube://www.youtube.com/" + yt + "/live";
+                            waitBrowser(yt);
+                        } else if (/webOS|BlackBerry|IEMobile|Opera Mini|mobile/i.test(navigator.userAgent))
+                            location.href = "https://m.youtube.com/" + yt + "/live";
+                        else
+                            location.href = "https://www.youtube.com/" + yt + "/live";
+                    } else {
+                        const twitch = url.split('twitch:')[1];
+                        if (/iPad|iPhone|iPod|webOS|BlackBerry|IEMobile|Opera Mini|mobile|Android/i.test(navigator.userAgent))
+                            location.href = 'https://m.twitch.tv/' + twitch;
+                        else
+                            location.href = 'https://twitch.tv/' + twitch;
+                    }
                 } catch(err) {
                     alert("Произошла ошибка, повторите попытку позже. " + err.message)
                 }
