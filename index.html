@@ -193,14 +193,12 @@
         }
     
         showactivity("loading", "block");
-        (async () => {
-            await sleep(2000);
+        window.onload = event => {
             if (navigator.userAgent.includes("BytedanceWebview"))
                 showactivity("tiktok", "block");
-            else {
+            else
                 showactivity("main", "block");
-            }
-        })();
+        };
 
         async function youtube() {
             showactivity("loading", "block");
